@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   // find all products
   try {
     const productData = await Product.findAll({
-      include: [Category, Tag]
+      include: [{model: Category }, { model: Tag }]
     });
     return res.json(productData);
     
@@ -24,7 +24,7 @@ router.get('/:id', async (req, res) => {
   try {
     const productData = await Product.findOne({
       where: { id: req.params.id},
-      include: [Category, Tag]
+      include: [{model: Category }, { model: Tag }]
     });
     return res.json(productData);
 
@@ -116,7 +116,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const deletedProductCount = await Product.destroy({
       where: {
-        product_id: req.params.id,
+        id: req.params.id,
       },
     });
 
